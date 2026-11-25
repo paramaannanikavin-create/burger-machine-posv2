@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e"><meta name="description" content="Burger Machine cashier POS">
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
+<title>Burger Machine POS</title>
+</head>
+<body>
+<header class="top"><div class="brand"><span class="logo">BM</span><div><b>BURGER MACHINE</b><small>Cashier POS</small></div></div><span id="storageTag" class="tag">Offline ready</span></header>
+<nav class="tabs">
+<button class="tab active" data-page="new">＋ New Order</button><button class="tab" data-page="hub">Order Hub <i id="hubCount">0</i></button><button class="tab" data-page="history">History</button><button class="tab" data-page="menu">Menu</button>
+</nav>
+<main>
+<section id="page-new" class="page active">
+<div class="section-head"><div><h1>New Order</h1><p>Tap products to add sa order.</p></div><button class="light" id="clearCart">Clear</button></div>
+<label class="field">Customer name (optional)<input id="customerName" placeholder="Customer name"></label>
+<div id="categories" class="categories"></div><div id="products" class="products"></div>
+<div class="panel"><h2>Current Order</h2><div id="cartItems"><p class="empty">Wala pang items. Tap a product above.</p></div>
+<div class="total-line"><span>Grand Total</span><strong id="cartTotal">₱0.00</strong></div>
+<label class="field">Order note (optional)<textarea id="orderNote" rows="2" placeholder="Special instructions"></textarea></label>
+<button class="primary full" id="confirmOrder">Confirm Order / Send to Hub</button><p class="hint">Order muna dito. Sa Order Hub ka mag-e-enter ng bayad at makikita ang sukli.</p></div>
+</section>
+<section id="page-hub" class="page">
+<div class="section-head"><div><h1>Order Hub</h1><p>Orders awaiting preparation or payment.</p></div><button class="light" id="refreshHub">Refresh</button></div><div id="hubOrders"></div>
+</section>
+<section id="page-history" class="page">
+<div class="section-head"><div><h1>Order History</h1><p>Completed and cancelled orders.</p></div></div>
+<input id="historySearch" class="search" placeholder="Search order number or customer name"><div id="historyOrders"></div>
+</section>
+<section id="page-menu" class="page">
+<div class="section-head"><div><h1>Menu & Prices</h1><p>Edit prices and products. Saved on this phone.</p></div><button class="primary" id="addProduct">＋ Add item</button></div>
+<div id="menuEditor"></div>
+<div class="panel"><h2>Data backup</h2><p class="hint">Local data lang ito sa phone/browser na ito. Export backup regularly para may kopya.</p><div class="actions"><button class="light" id="exportData">Export backup</button><label class="light filelabel">Import backup<input id="importData" type="file" accept="application/json"></label></div><p class="hint">Hindi automatic ang sync sa ibang phone. Kailangan ng online database/server para doon.</p></div>
+</section>
+</main>
+<div id="toast" role="status"></div>
+<dialog id="productDialog"><form method="dialog" id="productForm"><h2 id="dialogTitle">Add menu item</h2><input type="hidden" id="editId"><label class="field">Product name<input id="editName" required></label><label class="field">Category<input id="editCategory" list="categoryList" required><datalist id="categoryList"></datalist></label><label class="field">Price (₱)<input id="editPrice" type="number" min="0" step="0.01" required></label><div class="actions"><button class="light" value="cancel">Cancel</button><button class="primary" id="saveProduct" value="default">Save</button></div></form></dialog>
+<script src="app.js"></script>
+</body></html>
